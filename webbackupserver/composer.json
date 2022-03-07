@@ -1,0 +1,13 @@
+{
+    "config": {
+		"vendor-dir":"composer_modules",
+        "platform": {
+            "php": "7.4"
+        }
+	},
+    "require": {
+        "spomky-labs/otphp": "^10.0",
+        "vlucas/phpdotenv": "^5.4",
+        "paragonie/halite": "^4.1"
+    }
+}

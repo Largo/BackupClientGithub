@@ -1,0 +1,14 @@
+# This file is used to overwrite values in docker-compose.yml for gitpod
+# Thanks to https://mindbyte.nl/2018/04/04/overwrite-ports-in-docker-compose.html
+
+version: "3.6"
+
+services:
+  web:
+    network_mode: service:database
+  phpmyadmin:
+    network_mode: service:database
+  mailhog:
+    network_mode: service:database
+  # ftpd_server:
+  #   network_mode: service:database

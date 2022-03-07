@@ -1,0 +1,23 @@
+# This file is used to overwrite values in docker-compose.yml for gitpod
+# Thanks to https://mindbyte.nl/2018/04/04/overwrite-ports-in-docker-compose.html
+
+version: "3.6"
+
+services:
+  database:
+    network_mode: bridge
+    ports: 
+      - "3306:3306"
+  web:
+    network_mode: bridge
+    ports:
+      - "42535:8000"
+  phpmyadmin:
+    network_mode: bridge
+    ports:
+      - "9010:9010"
+  mailhog:
+    network_mode: bridge
+    ports:
+      - "8025:8025"
+      - "1025:1025"

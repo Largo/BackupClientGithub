@@ -1,0 +1,56 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.183.0/containers/php-mariadb
+// Update the VARIANT arg in docker-compose.yml to pick a PHP version: 7, 7.3, 7.4 
+{
+	"name": "Backupclient Testserver",
+	"dockerComposeFile": ["docker-compose.yml", "docker-compose.codespaces.yml"],
+	"service": "web",
+	"workspaceFolder": "/var/www/html/httpdocs",
+	
+	// Set *default* container specific settings.json values on container create.
+	"settings": { 
+		"remote.portsAttributes": {
+			"8000": {
+				"label": "web",
+				"onAutoForward": "openBrowser",
+				"onForward": "openBrowser"
+			},
+			"3306": {
+				"label": "MySQL Server"
+			},
+			"9010": {
+				"label": "PHPMyAdmin"
+			},
+			"8025": {
+				"label": "MailHog"
+			},
+			"1025": {
+				"label": "MailHog SMTP Server"
+			},
+		}
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"felixfbecker.php-debug",
+		"felixfbecker.php-intellisense",
+		"mrmlnc.vscode-apache",
+		"mblode.twig-language-2",
+		"mblode.twig-language",
+		"bmewburn.vscode-intelephense-client",
+		"formulahendry.code-runner",
+		"github.copilot",
+		"deibit.devdocs",
+		"eamodio.gitlens"
+	],
+
+	"forwardPorts": [8000, 8025, 1025, 9010, 3306], // ftp 21, 30000, 30001, 30002, 30003, 30004, 30005, 30006, 30007, 30008, 30009
+	"postCreateCommand": "bash ./.devcontainer/postCreateCommand.sh",
+
+	"otherPortsAttributes": {
+		"onAutoForward": "notify"
+	},
+
+	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	//"remoteUser": "root"
+}

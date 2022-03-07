@@ -1,0 +1,9 @@
+{
+    "config": {
+		"vendor-dir":"composer_modules"
+	},
+    "require": {
+        "spomky-labs/otphp": "^10.0",
+        "vlucas/phpdotenv": "^5.4"
+    }
+}

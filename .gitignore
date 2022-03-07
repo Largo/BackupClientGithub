@@ -1,0 +1,9 @@
+/dev_scripts
+/logs
+composer_modules
+/vendor
+/download-schnittstelle
+/upload-schnittstelle
+.env
+/temp
+*.zip

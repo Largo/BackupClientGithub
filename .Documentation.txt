@@ -1,0 +1,38 @@
+ # Backupscript
+ 
+ Client that connects to the server and downloads the backup.
+    The client sends the onetime password and the APIKEY to the server.
+    The server verifies the APIKEY and the onetime password.
+    If the APIKEY and the onetime password are correct, the server
+    creates a temporary file and writes the backup to it.
+    The backup folder is different for each client.
+    THE OTP IS encrypted using public key cryptography.
+    The backup is encrypted by the server.
+
+    This file can be run by a cronjob.
+
+
+    Todo:
+    - Maybe a GUI to configure the client
+    - put backup into different folder per project
+    - Send email if failed
+    - define cronjob.
+    - test backup if it contains sql (search for create)
+    - test backup if it can be decrypted
+    - add create database to sql export
+    - remove older exports?
+
+
+    This script is used to backup the database.
+   The client sends the onetime password and the APIKEY to the server.
+   The server verifies the APIKEY and the onetime password.
+   If the APIKEY and the onetime password are correct, the server
+   creates a temporary file in memory and writes the backup to it.
+   It then echos the content of the file.
+   
+   The backup is tested if it contains sql (search for create)
+   
+  TODO:
+  - MySQLDump was changed, move change outside project. / document change
+  - Document how to install / can dependencies be removed?
+  - always install in seperate folder?

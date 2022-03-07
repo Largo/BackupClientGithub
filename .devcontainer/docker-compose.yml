@@ -1,0 +1,50 @@
+version: "3.6"
+
+volumes:
+  database:
+  composer-modules:
+  logs:
+  ftpdpasswd:
+
+services:
+  database:
+    env_file: devcontainer.env
+    image: mariadb:10.4
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - "./sql/init.sql:/docker-entrypoint-initdb.d/init.sql"
+      - "database:/var/lib/mysql"
+
+  web:
+    image: largo/devcontainer_app/phpapache:8.0
+    build:
+      context: ./
+      target: php_apache_cs_app
+      dockerfile: ./docker/php-apache2/Dockerfile
+    environment:
+      - PHP_PORT=8000
+    volumes:
+      - "..:/var/www/html/httpdocs"
+      - "./dev_scripts:/var/www/html/httpdocs/dev_scripts"
+      - "./git/hooks/post-checkout:/var/www/html/httpdocs/.git/hooks/post-checkout"
+      - "./config/config.env.php:/var/www/html/httpdocs/app/config/config.env.php"
+      - "./config/config.local.php:/var/www/html/httpdocs/app/config/config.local.php"
+      - "composer-modules:/var/www/html/httpdocs/composer_modules"
+      - "logs:/var/www/html/httpdocs/logs"
+      - "../upload-schnittstelle:/var/www/html/httpdocs/upload-schnittstelle"
+      - "../download-schnittstelle:/var/www/html/httpdocs/download-schnittstelle"
+  
+  phpmyadmin:
+    depends_on:
+      - database
+    image: phpmyadmin:latest
+    environment:
+      - PMA_HOST=database
+      - PMA_PORT=3306
+      - APACHE_HTTP_PORT_NUMBER=9010
+    command: /bin/bash -c "sed -i \"s/80/$$APACHE_HTTP_PORT_NUMBER/g\" /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf && /docker-entrypoint.sh apache2-foreground"
+
+  mailhog:
+    image: cd2team/mailhog:1633825801
+    logging:
+      driver: 'none'  # disable saving logs

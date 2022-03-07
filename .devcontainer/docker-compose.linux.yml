@@ -1,0 +1,33 @@
+version: "3.6"
+
+networks:
+  internal-network: 
+    external: false
+  localhost:
+    #driver: bridge
+    external: true
+
+services:
+  database:
+    networks:
+      - internal-network
+  web:
+    networks:
+      - internal-network
+      - localhost
+    ports: 
+      - "8000:8000"
+  
+  phpmyadmin:
+    networks:
+      - internal-network
+      - localhost
+    ports:
+      - "8010:9010"
+
+  mailhog:
+    networks:
+      - internal-network
+      - localhost
+    ports:
+      - "8025:8025"

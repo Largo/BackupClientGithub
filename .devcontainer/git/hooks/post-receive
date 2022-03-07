@@ -1,0 +1,3 @@
+# Folgende Zeile bei Hosting einfuegen:
+# Prod: (php composer.phar install --no-plugins --no-scripts --no-dev --no-interaction --ignore-platform-reqs)
+(composer install --no-plugins --no-scripts --no-interaction)
